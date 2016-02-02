@@ -1,0 +1,255 @@
+#+TITLE: A Linear Response, DFT+U Study of Trends in the Oxygen Evolution Activity of Transition Metal Rutile Dioxides
+#+LATEX_CLASS: achemso
+#+LATEX_CLASS_OPTIONS: [journal=jpccck,manuscript=letter,email=true]
+# +latex_header: \setkeys{acs}{biblabel=brackets,super=true,articletitle=true}
+#+latex_header: \setkeys{acs}{maxauthors=10}
+#+latex_header: \setkeys{acs}{etalmode=truncate}
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+OPTIONS: author:nil date:nil toc:nil num:t
+
+#+latex_header: \usepackage[utf8]{inputenc}
+#+latex_header: \usepackage{url}
+#+latex_header: \usepackage{mhchem}
+#+latex_header: \usepackage{graphicx}
+#+latex_header: \usepackage{color}
+#+latex_header: \usepackage{amsmath}
+#+latex_header: \usepackage{textcomp}
+#+latex_header: \usepackage{wasysym}
+#+latex_header: \usepackage{latexsym}
+#+latex_header: \usepackage{amssymb}
+#+latex_header: \usepackage{lmodern}
+
+#+latex_header: \usepackage[linktocpage, pdfstartview=FitH, colorlinks, linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, menucolor=black, urlcolor=black]{hyperref}
+
+#+latex_header: \author{Zhongnan Xu}
+#+latex_header: \affiliation{Department of Chemical Engineering, Carnegie Mellon University, 5000 Forbes Ave, Pittsburgh, PA 15213}
+#+latex_header: \author{Jan Rossmeisl}
+#+latex_header: \affiliation{Center for Atomic-Scale Materials Design, Department of Physics, Technical University of Denmark, Building 307, 2800 Kgs. Lyngby, Denmark}
+#+latex_header: \author{John R. Kitchin}
+#+latex_header: \email{jkitchin@andrew.cmu.edu}
+#+latex_header: \affiliation{Department of Chemical Engineering, Carnegie Mellon University, 5000 Forbes Ave, Pittsburgh, PA 15213}
+
+#+begin_abstract
+There are known errors in oxidation energies of transition metal oxides caused by an improper treatment of their $d$-electrons. The Hubbard /U/ is the computationally cheapest addition one can use to capture correct reaction energies, but the specific Hubbard /U/ oftentimes must be empirically determined only when suitable experimental data exists. We evaluated the effect of adding a calculated, linear response /U/ on the predicted adsorption energies, scaling relationships, and activity trends with respect to the oxygen evolution reaction for a set of transition metal dioxides. We find that applying a $U$ greater than zero always causes adsorption energies to be more endothermic. Furthermore, the addition of the Hubbard /U/ greater than zero does not break scaling relationships established without the Hubbard /U/.  The addition of the calculated linear response /U/ value produces shifts of different systems along the activity volcano that results in improved activity trends when compared with experimental results.\\
+\\
+Keywords: density functional theory, oxygen evolution, scaling relationships, linear response U
+#+end_abstract
+
+* Introduction
+Density functional theory (DFT) is a first principles tool that can be used to understand catalytic processes and identify promising candidates through the calculation of kinetic and thermodynamic properties, which include formation energies, adsorption energies, and reaction barriers cite:noerskov-2009-towar,greeley-2006-comput,norskov-2002-univer-heter-catal,michaelides-2003-ident. Transition metal oxides (TMOs), a class of catalysts used in a wide variety of important chemical processes cite:weaver-2013-surfac-chemis,doyle-2013-redox,gouma-2011-nanos-polym, have thermodynamic and electronic properties that are difficult to capture accurately using standard exchange correlation functionals (LDA and GGA) cite:cohen-2008-insig-curren. The culprit of these inaccuracies is the self-interaction error produced by highly correlated electrons, such as the /d/-electrons in oxidized systems cite:wang-2006-oxidat,franchini-2007-groun. The Hubbard /U/ (DFT+$U$) is the most feasible correction to account for the self-interaction error cite:anisimov-1997-first,anisimov-1991-band-mott, but its method of application is not trivial. The specific Hubbard /U/ required for a given material can be empirically determined, but the experimental data required oftentimes is not available. For example, adsorption energies on well defined surfaces of oxides are typically difficult to measure cite:campbell-2013-enthal-entrop. Bulk oxidation energies can be used, but the Hubbard /U/ values are typically reaction specific cite:wang-2006-oxidat,aykol-2014-local-gga. In contrast, the Hubbard /U/ can also be calculated via a linear response method cite:cococcioni-2005-linear, but there have been few studies that use this method in for the calculation of catalytic properties.
+
+One of the most studied reactions catalyzed by transition metal oxides is the oxygen evolution reaction cite:dau-2010,parent-2014-progr-base. The oxygen evolution reaction (OER) is the conversion of H_{2}O into protons, electrons and oxygen. The high energy of protons and electrons can be stored into the chemical bonds of hydrogen, alcohols, or hydrocarbons, while pure oxygen is a widely used oxidant in chemical industries and must be separated from N_{2} if acquired from air. The observed trends in kinetics of OER on different catalysts can be related to calculated chemical and electronic properties transition metal oxides cite:rossmeisl-2007-elect,man-2011-univer,suntivich-2011,vojvodic-2011-optim. Key conclusions from these studies are that the adsorption energies of a few intermediates describe the activity trends, these adsorption energies scale with each other, and the scaling of adsorption energies produces an activity volcano with a theoretical activity limit. These conclusions were established without the Hubbard /U/. While a few studies have applied the Hubbard /U/ to test cases cite:liao-2012-water,garcia-mota-2012-impor, it is still not clear whether the aforementioned conclusions still apply to with the application of the Hubbard /U/ nor if the linear response /U/ will lead to better agreement with experimental results.
+
+In this study, we use DFT+$U$ coupled with the calculated linear response /U/ to evaluate trends in activity of transition metal rutile dioxides for the oxygen evolution reaction. We apply an atomistic thermodynamic method that relates the activity of surfaces to differences in the adsorption energies OH, O, and OOH. We find that the application of any $U$ in almost all cases leads to more endothermic adsorption energies of all intermediates and these shifts in adsorption energies preserve the scaling relationships between OER intermediates calculated with $U=0$. The combination of both observations results in relatively small shifts of all systems to the weak binding side of the OER volcano. We find that these shifts leads to activity trends that are more consistent with experimental observations.
+
+* Methods
+** DFT calculation parameters
+All DFT calculations were performed with \textsc{Quantum-ESPRESSO} cite:giannozzi-2009-quant-espres with the Perdew-Burke-Ernzerhof (PBE) exchange correlation functional cite:Perdew1996,Perdew1997a. The core electrons were described by the GBRV library of ultrasoft pseudopotentials cite:garrity-2014-pseud-dft. The kinetic energy cutoff for wavefunctions and the charge density were 40 and 500 Ry, respectively. For surface slabs, we used a 4 \times 4 \times 1 Monkhorst-Pack grid of /k/-points cite:monkhorst-1976-special-brill. All calculations were spin-polarized.
+
+The general method for the calculation of the linear response /U/ is described in a previous paper by Cococcioni and de Gironcoli cite:cococcioni-2005-linear. For calculation of linear response /U/ values in the bulk, we applied perturbations up to $\pm$ 0.15 eV to both the metal and oxygen in 2 \times 2 \times 2 rutile supercells consisting of 48 atoms to ensure that interactions between the perturbations were and their periodic images were minimal.
+
+** Structural parameters
+The equilibrium volume, cell shape, atomic positions of all transition metal dioxide rutile structures were determined by constructing a polynomial equation of state and full relaxation of the shape and atomic coordinates. Ground state magnetic configurations were calculated for all materials, taking into consideration non-magnetic, ferromagnetic, and anti-ferromagnetic orderings.
+
+All adsorption energies were performed on the (110) surface. Because of the large number of calculations we performed in this study, we chose to model the (110) surface as a two layer slab with terminating hydrogen atoms on the bottom layer. A similar two layer slab has been used in previous studies of oxygen evolution on MnO_{2} and IrO_{2} surfaces cite:steegstra-2013-revis-redox,busch-2012-water-oxidat. The validation of this smaller slab with respect to the typical four layer slab used in similar previous studies cite:rossmeisl-2007-elect,man-2011-univer,halck-2014-beyon is discussed in the results. Figure ref:surface-slabs shows the two layer slab and four layer slab used for validation along with the adsorption site used for all calculations, which is typically called the 5$cus$ site.
+
+** Atomistic thermodynamic framework for oxygen evolution
+The atomistic thermodynamic framework we are using to study the oxygen evolution reaction has been used before cite:rossmeisl-2007-elect,man-2011-univer,mom-2014-model-oxygen,calle-vallejo-2013-oxygen, so we only briefly summarize it below. The mechanism of OER is assumed to proceed through four electron proton transfer steps and the OH, O, and OOH intermediates, shown below in acidic conditions.
+
+\begin{align}
+\ce{H_{2}O + \ast} &\rightarrow \ce{^{\ast}OH + H+ + e-} \\
+\ce{^{\ast}OH} &\rightarrow \ce{^{\ast}O + H+ + e-} \\
+\ce{^{\ast}O + H_{2}O} &\rightarrow \ce{^{\ast}OOH + H+ + e-} \\
+\ce{^{\ast}OOH} &\rightarrow \ast + \ce{O2 + H+ + e-}
+\end{align}
+
+At constant pH and with respect to the normal hydrogen electrode (NHE), the Gibbs free energy of each elementary step is shown below,
+
+\begin{align}
+\Delta G_1 &= \Delta G_{\ce{OH}}\\
+\Delta G_2 &= \Delta G_{\ce{O}} - \Delta G_{\ce{OH}}\\
+\Delta G_3 &= \Delta G_{\ce{OOH}} - \Delta G_{\ce{O}}\\
+\Delta G_4 &= 4.92[\textrm{eV}] - \Delta G_{\ce{OOH}}
+\end{align}
+
+\noindent where the adsorption energy of OH, O, and OOH are as follows
+
+\begin{align}
+\Delta G_{\ce{O}} &= E_{slab,\ce{O}} - E_{slab} - (E_{\ce{H2O}} - E_{\ce{H2}}) \\
+\Delta G_{\ce{OH}} &= E_{slab,\ce{OH}} - E_{slab} - (E_{\ce{H2O}} - \frac{1}{2}E_{\ce{H2}}) \\
+\Delta G_{\ce{OOH}} &= E_{slab,\ce{OH}} - E_{slab} - (2E_{\ce{H2O}} - \frac{3}{2}E_{\ce{H2}})
+\end{align}
+
+\noindent where $E_{slab,A}$ is the total energy of slab with adsorbate $A$, $E_{slab}$ is the total energy of the bare slab, and $E_{\ce{H2O}}$ and $E_{\ce{H2}}$ is the total energy of H_{2}O and H_{2} in an asymmetric box. All adsorbate and gas species included previously reported zero point energy corrections cite:man-2011-univer.
+
+Because each reaction step involves the transfer of an electron to the electrode, applying a potential of /U/ volts on the electrode with respect to NHE would result in a decrease of the $\Delta G$ of each reaction step by /U/ eV. When a potential is applied such that the $\Delta G$ for all reaction steps is less than zero, all reaction steps are considered exothermic. The potential at which this happens minus 1.23 V is considered the theoretical overpotential, $\eta^{OER}$, and is the key metric we use to evaluate the activity of different catalysts for OER. The expression for $\eta^{OER}$ is shown below in Equation eqref:complete-eta,
+
+\begin{equation}
+\eta^{OER} = \textrm{Max}[\Delta G_{1},\Delta G_{2},\Delta G_{3},\Delta G_{4}]/e - 1.23V.
+\label{complete-eta}
+\end{equation}
+
+The existence of scaling relationships between different reaction energies $\Delta G$ gives rise to a descriptor and activity volcano where either $\Delta G_{2}$ or $\Delta G_{3}$ is the largest reaction energy and both of their magnitudes scale with the difference between the adsorption energies of O and OH ($\Delta G_{O} - \Delta G_{OH}$). The details of this analysis can be found in the seminal work that originally established this atomistic thermodynamics cite:rossmeisl-2007-elect,man-2011-univer, but we will be using this relationship to establish a similar volcano plot in our analysis.
+
+* Results and Discussion
+** Validation of the surface slab model
+The TMOs we investigated are shown in Table ref:bulk along with their equilibrium lattice constants, magnetic structure, and calculated linear response /U/. The lattice coordinates and magnetic structure were then used to construct the two and four layer slabs, which are shown in Figure ref:surface-slabs (a), while the linear response /U/ was used when assessing the OER activity trends of the different oxides.
+
+#+CAPTION: Table of transition metal dioxides we studied along with their corresponding equilibrium lattice parameters and magnetic configurations. /NM/ and /FM/ stand for nonmagnetic and ferromagnetic, respectively.
+#+TBLNAME: bulk
+#+ATTR_LATEX: :placement [H] :align cccccc
+|          |      |      |      | Magnetic  |       Linear |
+| Compound |    a |    c |    u | Structure | response /U/ |
+|----------+------+------+------+-----------+--------------|
+| TiO_{2}  | 4.65 | 2.97 | 0.31 | /NM/      |         4.95 |
+| CrO_{2}  | 4.38 | 2.90 | 0.30 | /FM/      |         7.15 |
+| MnO_{2}  | 4.36 | 2.84 | 0.30 | /FM/      |         6.63 |
+| NbO_{2}  | 4.94 | 2.96 | 0.29 | /NM/      |         3.32 |
+| MoO_{2}  | 4.95 | 2.73 | 0.28 | /NM/      |         4.83 |
+| RuO_{2}  | 4.53 | 3.18 | 0.31 | /NM/      |         6.73 |
+| RhO_{2}  | 4.55 | 3.11 | 0.31 | /NM/      |         5.97 |
+| ReO_{2}  | 4.95 | 2.68 | 0.28 | /NM/      |         5.27 |
+| IrO_{2}  | 4.54 | 3.18 | 0.31 | /NM/      |         5.91 |
+| PtO_{2}  | 4.59 | 3.23 | 0.31 | /NM/      |         6.25 |
+
+We first validate the usage of the two layer surface model shown in Figure ref:surface-slabs (a). We motivate the usage of this slab because we are performing over 400 calculations using /U/ values and would like to minimize the computational cost. We first calculate the adsorption energies of OH, O, and OOH on both the two layer and four layer slab at $U=0$ for all systems. Figure ref:surface-slabs (b) shows a parity plot between adsorption energies calculated on both slabs, and we see excellent agreement for OOH, good agreement for OH, and reasonable agreement for O. More importantly, Figure ref:surface-slabs (c) also shows that both sets of adsorption energies fall on the same scaling relationship. This suggests that a majority of the differences between the two adsorption energies are systematic, and that the underlying physics that results in the scaling relationships is the same for both the two and four layer slab. Following these results, we moved on to calculate adsorption energies on the two layer slab at $U>0$.
+
+#+CAPTION: (a) The four layer rutile (110) surface (left) we used to validate the usage of the two slab (right) for DFT+$U$ calculations of adsorption energies. (b) A parity plot between the adsorption energies of OH (blue circles), O (green squares), and OOH (red triangles) calculated at $U=0$ on the two layer slab (x-axis) and four layer slab (y-axis). (c) Scaling relationships between of the adsorption energies of OH/O (orange markers) and OOH/OH (green markers) calculated with both the two layer slab (circles) and four layer slab (squares).
+#+LABEL: surface-slabs
+#+ATTR_LATEX: :placement [H] :width 3.5in
+#+ATTR_ORG: :width 300
+[[./figures/FIG1.png]]
+
+** Variation of adsorption energies and scaling relationships with respect to /U/
+For all materials, we calculated the adsorption energies by applying a $U=0$ eV to $U=8$ eV in 0.5 eV intervals. The starting geometry was taken from the relaxed structure of the calculation at $U=0$. The entirety of our results can be found in the supporting information cite:xu-suppor, but for brevity we discuss results for only NbO_{2}, IrO_{2}, TiO_{2}, and MnO_{2} below. Observations for NbO_{2} and IrO_{2} were characteristic of early and late 4$d$ and 5$d$ transition metal dioxides, respectively. For 3$d$ systems, TiO_{2} is a special case, and observations for MnO_{2} and CrO_{2} were similar.
+
+#+CAPTION: (a) and (c) show the dependence of the adsorption energies of OH, O, and OOH on $U$ on NbO_{2} and IrO_{2}, while (b) and (d) show the effect of $U$ on the OH/O and OH/OOH scaling relationships on NbO_{2} and IrO_{2}. In (a) and (c), the vertical dashed line shows the value of the linear response /U/ value for the bulk oxide. In (b) and (d), the applied value of the /U/ is shown by the color of the marker. The scaling relationships calculated at $U=0$, shown in Figure ref:surface-slabs (c), are reproduced in (b) and (d) for the OH/O (red line) and OH/OOH (green line) offset to the adsorption energy at $U=0$ of the particular compound for clarity.
+#+LABEL: 4d-5d-adsorption
+#+ATTR_LATEX: :placement [H] :width 5in
+#+ATTR_ORG: :width 300
+[[./figures/FIG2.png]]
+
+We found that the application of $U>0$ had a number of systematic effects to the adsorption energies of OH, O, and OOH to the 4$d$ and 5$d$ TMO rutiles. These are summarized in Figure ref:4d-5d-adsorption. First, the application of /U/ results in shifts to more endothermic adsorption energies of all species on all compounds (Figure ref:4d-5d-adsorption (a) and (c)). For low /U/ values, these shifts are monotonic and smooth, but for high /U/ values on early TMOs of MoO_{2}, NbO_{2}, and ReO_{2}, they deviate from the monotonic trend at low /U/ values. It is likely that such high values of /U/ are not appropriate for these early TMOs. Early TMOs have a smaller occupancy of $d$-electrons, and therefore one would expect a lower value of /U/ is needed to correct the self-interaction error. This is supported by the lower linear response /U/ for the early 4$d$ and 5$d$ TMOs (Table ref:bulk). We also observed that the calculated linear response /U/ for all early 4$d$ and 5$d$ TMOs sits right at the point where the smooth, monotonic $\Delta E_{ads}(U)$ behavior breaks down. This is shown for NbO_{2} in Figure ref:4d-5d-adsorption (a) and the rest of the early TMOs in the supporting information. This is further evidence that high /U/ values are not appropriate for early TMOs. For late TMOs of PtO_{2}, IrO_{2}, RuO_{2}, and RhO_{2}, the changes are smooth all the way up to a $U=8$, including their calculated linear response /U/ values.
+
+For 4$d$ and 5$d$ oxides, the /U/-induced endothermic changes of the adsorption energy preserve scaling relationships established at $U=0$. This is shown in Figure ref:4d-5d-adsorption (b) and (d). This is true for all /U/ values tested on the 4$d$ and 5$d$ TMOs, including high /U/ values on early TMOs. Our results further demonstrates the robustness of scaling relationships, showing that the additional physics via the Hubbard /U/ does not lead to deviations of scaling relationships. This also demonstrates that correlations between the electronic structure and adsorption energies implied by the scaling relationships are also preserved with the addition of /U/. This conclusion is consistent with previous work that found similar electronic structure/activity correlations on doped TiO_{2} with both DFT and DFT+$U$ results cite:garcia-mota-2012-elect-tio2.
+
+#+CAPTION: (a) and (c) show the dependence of the adsorption energies of OH, O, and OOH on $U$ on MnO_{2} and TiO_{2}, while (b) and (d) show the effect of $U$ on the OH/O and OH/OOH scaling relationships on MnO_{2} and TiO_{2}. In (a) and (c), the verticle dashed line shows the value of the linear response, calculated /U/ value for the bulk oxide. In (b) and (d), the applied value of the /U/ is shown by the color of the marker. The scaling relationships calculated at $U=0$, shown in Figure ref:surface-slabs (c), are reproduced in (b) and (d) for the OH/O (red line) and OH/OOH (green line) offset to the adsorption energy at $U=0$ of the particular compound for clarity.
+#+LABEL: 3d-adsorption
+#+ATTR_LATEX: :placement [H] :width 5in
+#+ATTR_ORG: :width 300
+[[./figures/FIG3.png]]
+
+In contrast to our results on 4$d$ and 5$d$ TMOs, we found a mixture of results for 3d TMOs. Adsorption energies at $U>0$ on CrO_{2} and MnO_{2} gave similar results to each other, with adsorption on MnO_{2} shown in Figure ref:3d-adsorption (a) and (b). With increasing /U/ values, we observe a smooth monotonic increase in the adsorption energy, but at some intermediate /U/ value adsorption of OOH on the surface is no longer stable for some species, shown by the lack of change in adsorption energy for $U>4$ eV for MnO_{2}. This is what gives rise to the breaking of the scaling relationship between OH and OOH at /U/ \approx 4 eV. We are unsure how to interpret the breaking of the surface-adsorbate bonds, but it is clear that even at low /U/ values when adsorption was stable, the scaling relationships are preserved. This is consistent with our results on 4$d$ and 5$d$ TMO rutiles.
+
+For TiO_{2}, application of /U/ produces smooth, monotonic changes in the adsorption energy (Figure ref:3d-adsorption (c)), but interestingly the change in the OOH adsorption energy is exothermic upon increasing /U/. This was the only adsorption energy where the addition of /U/ produced a more exothermic adsorption energy. Also unique to TiO_{2} is that the scaling relationships are not preserved with the addition of /U/ (Figure ref:3d-adsorption (d)). The relative change in the adsorption energy with respect to increasing /U/ is also small. $\Delta E_{ads}^{OH}$ changes by less than 0.1 eV by applying a /U/ value of 8 eV.
+
+There is still conflicting literature on how the Hubbard /U/ should be implemented to capture accurate thermodynamic properties of Ti oxide systems cite:jain-2011,hu-2011-choic-u,yan-2013-calcul,aykol-2014-local-gga. Our results show this is still an open issue for adsorption on TiO_{2}. The Ti ion at the adsorption site of a stoichiometric TiO_{2} has a $d^{0}$ configuration and OH, O, or OOH primarily forms bonds with the 3$p$ electrons. Hence, adsorption induced changes to the electronic structure of the Ti $d$ electrons are subtle, which is reflected by the smaller change in the adsorption energies induced by adding a Hubbard /U/. This electronic structure phenomenon is typical for stoichiometric surfaces of closed shell materials, such as adsorption on stoichiometric alkaline-earth metal oxides cite:bajdich-2014-surfac-energ, and leads to deviations in trends of both adsorption and oxygen vacancy formation energies with respect to number of electrons cite:akhade-2012-effec-strain,calle-vallejo-2013-number,curnan-2014-effec-concen. This situation is not encountered in any other of the adsorption eneriges we studied.
+
+Because of this unique change in the electronic structure caused by adsorption on TiO_{2}, we hypothesize that the application of the Hubbard /U/ to the $d$-electrons of the TiO_{2} after adsorption may require different treatment. The /U/ we calculated for bulk TiO_{2} likely does not describe the TiO_{2} with a 3$p$ hole state. To resolve this special case, one might be required to calculate separate Hubbard /U/ values of the Ti ion with and without an adsorbate and use the DFT+\mathit{U}(R) method to calculate an adsorption energy that takes changes in /U/ into account cite:kulik-2011-accur-poten. Another possibility is the requirement of application of /U/ to lattice oxygen 2$p$ states or Ti 3$p$ states. A relatively high /U/ of 6 eV applied to the oxygen 2$p$ states was required to accurately capture hole states in SiO_{2} doped with Al cite:nolan-2006-hole-al.
+
+To summarize, we draw two main conclusions from our analysis of adsorption energies and scaling relationships with respect to increasing /U/ values. With the exception of TiO_{2}, where the significance of the Hubbard /U/ to calculate adsorption on TiO_{2} remains unclear, the application of /U/ produces more endothermic adsorption energies, and these changes in adsorption energy preserve the scaling relationships established at $U=0$. These conclusions further validate the scaling relationships and their usage for establishing models for catalytic reactions on TMOs cite:medford-2014-asses. The similar weakening of adsorption energies with respect to /U/ also suggests that a majority of trend studies of adsorption on TMOs at $U=0$ are probably valid at $U>0$. Our results also provide researchers with useful estimates on the effect of /U/ on adsorption energies. Having established some general rules between the Hubbard /U/, adsorption energies, and scaling relationships, we now move towards the specific application of OER and the usage of the linear response calculated /U/.
+
+** Activity trends with linear response /U/ value
+We next evaluate the effect of applying a calculated linear response Hubbard /U/ to the activity trends for OER. We focus our analysis on the IrO_{2}, PtO_{2}, RuO_{2}, and RhO_{2} oxides in our study. We choose only these materials for a number of reasons. First, from Pourbaix diagrams, one can easily see that CrO_{2}, MoO_{2}, NbO_{2} and ReO_{2} are not stable in either acidic or alkaline OER conditions cite:pourbaix-1974-atlas. In contrast, IrO_{2}, PtO_{2}, RuO_{2}, and RhO_{2} are predicted to be stable at acidic OER conditions and in some cases have been observed /in situ/ in experimental work cite:pourbaix-1974-atlas,sanchez-2014-in-situ,silva-2000-in-ruo2. MnO_{2} was not used in this comparison for two reasons. First, it is still unclear whether MnO_{2} is the active species at OER conditions. Recent studies have identified that the Mn^{3+} as the active species in OER cite:ramirez-2014-evaluat-mnox,gorlin-2010. Second, our results point towards OOH desorption at the linear response, calculated /U/ value. TiO_{2} was not used in our comparison due to our conclusion that our DFT+\textit{U} method did not seem appropriate for an accurate calculation of adsorption energies and it is not a good OER catalyst.
+
+#+CAPTION: The predicted activity trends of 4d and 5d rutile dioxides calculated without (blue circle) and with (red square) the linear response /U/. Arrow points in the effect of applying the linear response /U/. The volcano is fit to the idealized scaling relationships determined in a previous paper cite:man-2011-univer.
+#+LABEL: OER-volcano
+#+ATTR_LATEX: :placement [H] :width 3.25in
+[[./figures/FIG4.png]]
+
+Figure ref:OER-volcano shows the changes in the activity of the selected oxides as one applies the linear response, calculated Hubbard /U/. As expected from the observed preservation of scaling relationships, the changes in the adsorption energy produced by applying the linear response /U/ for all species results in movement along the weak binding and strong binding legs of the volcano, but /not/ changes in the activity volcano itself. Furthermore, all species are moved towards the weaker binding leg of the volcano, which is explained by the universal weakening of adsorption energies caused by applying the Hubbard /U/.
+
+The combination of these two observations leads to changes in the relative ordering of activity. With DFT, we predict the activity trend to be RhO_{2} $>$ IrO_{2} $>$ PtO_{2} $>$ RuO_{2}. With the addition of the calculated Hubbard /U/, we now predict the activity to be IrO_{2} $>$ RhO_{2} $>$ RuO_{2} $>$ PtO_{2}. The ordering with the addition of the Hubbard /U/ shows better agreement with experiments, which has been observed as RuO_{2} \approx IrO_{2} $>$ RhO_{2} $>$ PtO_{2} cite:miles-1976-period,cherevko-2014-dissol-noble. We still obtain discrepancy with regard to the activity of RuO_{2} with respect to RhO_{2}, but the addition of /U/ improves agreement with experimentally observed trends. IrO_{2} and RuO_{2} move towards the top of the volcano from the strong binding side, while RhO_{2} and PtO_{2} move away from the top of the volcano on the weak binding side. The combination of these two effects corrects the incorrect ordering of RhO_{2} $>$ IrO_{2} and PtO_{2} $>$ RuO_{2}. We note that previous results observed a different ordering between these compounds, found to be RuO_{2} $>$ PtO_{2} \approx RhO_{2} $>$ IrO_{2}, at $U=0$. We associate these slight differences with differences in pseudopotentials, calculation parameters, and the implementation of different surface models. However, both set of results saw IrO_{2} and RuO_{2} on the strong binding (left) side of the volcano and RhO_{2} and PtO_{2} on the weak binding (right) side of the volcano. Hence, it is likely the application of the linear response /U/ to those results should give similar improvements to those seen here, with IrO_{2} predicted to be more active than PtO_{2} and RhO_{2}.
+
+We also comment that though changes in ordering are observed, the absolute changes in reaction energies are relatively small. The changes in reaction energy with the application of the calculated /U/ value was on the order of 0.2 $\sim$ 0.4 eV, which in no case was enough to move a species from the strong binding to weak binding side of the volcano. Hence, we propose that large scale screening studies based on correlations between adsorption energies done without and with the Hubbard /U/ should produce similar conclusions, except perhaps near the top of the volcano.
+
+* Conclusions
+To summarize, we have performed a DFT+\textit{U} study on the adsorption of OER intermediates on the (110) surface of rutile transition metal dioxides. Our analysis focused on changes in the adsorption energy, scaling relationships, and activity trends by applying a range of Hubbard /U/ values in addition to the linear response, calculated /U/ value. We find that with the exception of TiO_{2}, the application of a large range of Hubbard /U/ values produces more endothermic adsorption energies and preserves scaling relationships established at $U=0$. We also find that when linear response /U/ values applied, the relative ordering of the activity of IrO_{2}, PtO_{2}, RuO_{2}, and RhO_{2} oxides improves with respect to experimental observations. Our work reveals a number of universal relationships between the Hubbard /U/ and catalytic processes on transition metal oxides.
+
+\begin{acknowledgement}
+This work was partially supported by the IMI Program of the National Science Foundation under Award No. DMR 08-43934. We gratefully acknowledge support from the DOE Office of Science Early Career Research
+program (DE-SC0004031).
+\end{acknowledgement}
+
+\begin{suppinfo}
+Full details of the computational setup and analysis of the computations is available. All input and output files can be found online at http://dx.doi.org/10.5281/zenodo.12635, and the supporting information contains scripts used for generating and analyzing these files.
+\end{suppinfo}
+
+bibliography:references.bib
+
+\begin{tocentry}
+
+\includegraphics{./figures/TOC.png}
+
+\end{tocentry}
+
+* build							   :noexport:
+
+The figures are built in the supporting information file, which is located [[file:rutile-OER-master/supporting-information.org][here]]. We delete the current figures, and copy those figures here.
+
+#+BEGIN_SRC sh
+rm -fr figures
+cp -R rutile-OER-master/figures figures
+#+END_SRC
+
+#+RESULTS:
+
+elisp:ox-manuscript-build-submission-manuscript-and-open
+
+** Preparation of the manuscript zip file
+#+BEGIN_SRC sh
+rm -f manuscript.zip
+zip manuscript.zip figures/*.eps manuscript.tex figures/TOC.eps
+#+END_SRC
+
+#+RESULTS:
+:   adding: figures/FIG1.eps (deflated 95%)
+:   adding: figures/FIG2.eps (deflated 89%)
+:   adding: figures/FIG3.eps (deflated 89%)
+:   adding: figures/FIG4.eps (deflated 72%)
+:   adding: figures/TOC.eps (deflated 24%)
+:   adding: manuscript.tex (deflated 72%)
+
+** Showing what changed
+
+Copy old version into a file so we can latexdiff. It looks like we do not have a specific commit for the submission. We seem to have lost history. This commit is the closest I can get for this.
+
+#+BEGIN_SRC sh
+git show -s 0b8a36b
+#+END_SRC
+
+#+RESULTS:
+: commit 0b8a36b570f33b3d3912d9e406de1f584e55d08b
+: Author: Zhongnan Xu <zhongnanxu@cmu.edu>
+: Date:   Mon Jan 26 13:26:40 2015 -0500
+:
+:     Initial commit after first submission
+
+#+BEGIN_SRC sh
+git show 0b8a36b:manuscript.org > initial-submission.org
+#+END_SRC
+
+This only approximately shows the differences, because it also uses the new references. Ideally, we should commit the tex file so we can rely on the real differences.
+#+BEGIN_SRC emacs-lisp
+(find-file "initial-submission.org")
+(ox-manuscript-export-submission-manuscript)
+#+END_SRC
+#+RESULTS:
+: initial-submission.tex
+
+Now we run latexdiff old.tex new.tex
+
+#+BEGIN_SRC sh :results silent
+rm -f revisions.pdf
+latexdiff initial-submission.tex manuscript.tex > revisions.tex
+pdflatex -shell-escape -interaction nonstopmode revisions
+pdflatex -shell-escape -interaction nonstopmode revisions
+pdflatex -shell-escape -interaction nonstopmode revisions
+#+END_SRC
+
+
+#+BEGIN_SRC sh
+open revisions.pdf
+#+END_SRC
+
+#+RESULTS:

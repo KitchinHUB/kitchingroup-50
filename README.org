@@ -1,0 +1,36 @@
+#+TITLE: A Linear Response, DFT+U Study of Trends in the Oxygen Evolution Activity of Transition Metal Rutile Dioxides
+
+#+BEGIN_SRC bibtex
+@article{xu-2015-linear-respon,
+  author =	 {Xu, Zhongnan and Rossmeisl, Jan and Kitchin, John R.},
+  title =	 {A Linear Response {DFT}+{U} Study of Trends in the Oxygen
+                  Evolution Activity of Transition Metal Rutile Dioxides},
+  journal =	 {The Journal of Physical Chemistry C},
+  volume =	 119,
+  number =	 9,
+  pages =	 {4827-4833},
+  year =	 2015,
+  doi =		 {10.1021/jp511426q},
+  url =		 { http://dx.doi.org/10.1021/jp511426q },
+  keywords =	 {DESC0004031, early-career, orgmode, },
+  eprint =	 { http://dx.doi.org/10.1021/jp511426q },
+}
+#+END_SRC
+
+Manuscript: [[./manuscript.org]]  [[./manuscript.pdf]]
+SI: [[./supporting-information.org]] [[./supporting-information.pdf]]
+
+See also:
+
+#+BEGIN_SRC bibtex
+@misc{xu-suppor,
+  author =	 {Zhongnan Xu and Jan Rossmeisl and John R. Kitchin},
+  title =	 {Supporting data for: A linear response, {DFT+U} study of trends
+                  in the oxygen evolution activity of transition metal rutile
+                  dioxides. doi:10.5281/zenodo.12635},
+  keywords =	 {DESC0004031, early-career, },
+  year =         {2015},
+  url =		 {https://zenodo.org/record/12635},
+  doi =		 {10.5281/zenodo.12635}
+}
+#+END_SRC
