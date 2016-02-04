@@ -1,4 +1,4 @@
-;;; kitchingroup-50.el --- CaPPA preprint for doi:10.1021/jp511426q
+;;; kitchingroup-50.el --- A Linear Response {DFT}+{U} Study of Trends in the Oxygen Evolution Activity of Transition Metal Rutile Dioxides
 
 ;; Copyright (C) 2016 John Kitchin
 
